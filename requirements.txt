@@ -1,0 +1,3 @@
+redelimiter does not have any dependencies aside from the python interpreter.
+It was built on python3.6, but it should work on other versions of python 2 or 3,
+however, since I haven't tested it, I can't guarantee that.
