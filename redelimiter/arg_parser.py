@@ -49,27 +49,24 @@ class ArgSet:
 
     def __fill_indelim(self):
         """Fills in indelim with the default value if it is None"""
-        if self.indelim != None:
-            pass
-        name, ext = split_filename(self.infiles[0])
-        indelim = get_default_delim(ext)
+        if self.indelim == None:
+            name, ext = split_filename(self.infiles[0])
+            self.indelim = get_default_delim(ext)
 
     def __fill_outdelim(self):
         """Fills in outdelim with the default value if it is None"""
-        if self.outdelim != None:
-            pass
-        name, ext = split_filename(self.outfile)
-        outdelim = get_default_delim(ext)
+        if self.outdelim == None:
+            name, ext = split_filename(self.outfile)
+            self.outdelim = get_default_delim(ext)
 
     def __fill_outfile(self):
         """Fills in outfile with the default value if it is None"""
-        if self.outfile != None:
-            pass
-        name, ext = split_filename(self.infiles[0])
-        outext = get_default_ext(self.outdelim)
-        if ext == outext:
-            name += "_out"
-        self.outfile = name + '.' + outext
+        if self.outfile == None:
+            name, ext = split_filename(self.infiles[0])
+            outext = get_default_ext(self.outdelim)
+            if ext == outext:
+                name += "_out"
+            self.outfile = name + '.' + outext
 
     def fill_missing(self):
         """Validates the argument set and fills in any missing optional arguments with their default values"""
@@ -147,9 +144,9 @@ def parse_args(argv):
     except getopt.GetoptError as err:
         print(err)
         usage()
-        sys.exit(2)
+        sys.exit(1)
     except ArgumentError as err:
         print(err)
         usage()
-        sys.exit(3)
+        sys.exit(2)
     return args
