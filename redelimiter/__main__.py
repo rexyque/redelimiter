@@ -37,8 +37,16 @@ Defaults:
     for other delimiters is .txt
 """
 
-import getopt, sys
-from redelimiter.arg_parser import *
-from redelimiter.redelimiter import *
+import sys
+from arg_parser import *
+from redelimiter import *
 
 def main():
+    args = parse_args(sys.argv[1:])
+    if args.help:
+        print(__doc__)
+        sys.exit(0)
+    redelimit(args)
+
+if __name__ == "__main__":
+    main()
